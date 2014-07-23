@@ -24,5 +24,5 @@ gardenofwine, gardenofwine@gmail.com
 
 ## License
 
-BetterContent is available under the MIT license. See the LICENSE file for more info.
+BetterContent is available under the GPL license. See the LICENSE file for more info.
 
