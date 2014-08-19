@@ -10,4 +10,5 @@
 
 @interface BTCScanner : NSObject
 
+- (NSArray *)visibleComponents;
 @end

@@ -6,6 +6,7 @@
 //
 //
 
+#import <BlocksKit.h>
 #import "BTCServerCoordinator.h"
 #import "BTCScanner.h"
 
@@ -18,6 +19,7 @@
 
 - (void)start{
     self.contentScanner = [BTCScanner new];
+    [self startScanTask];
     
 //    self.labelRegistry = [NOCLabelsRegistry new];
 //    self.labelRegistry.delegate = self;
@@ -27,6 +29,19 @@
     
 }
 
+- (void)startScanTask{
+    __weak __typeof(&*self)weakSelf = self;
+    [NSTimer bk_scheduledTimerWithTimeInterval:1 block:^(NSTimer *timer) {
+        NSArray *visibleComponents = [weakSelf.contentScanner visibleComponents];
+//        NSArray *nocLabelsArray = [visibleComponents.allKeys bk_map:^id(NSString *key) {
+//            return [[NOCLabel alloc] initWithKey:key label:[visibleLabelsDict valueForKey:key]];
+//        }];
+        
+        // TODO transfer all the labels to be a NSArray of NOCLables
+//        [weakSelf.labelRegistry setCurrentVisibleNOCLabels:nocLabelsArray];
+    } repeats:YES];
+    
+}
 
 #pragma mark - singelton
 
