@@ -33,4 +33,13 @@ Pod::Spec.new do |s|
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
+  
+  s.subspec 'Core' do |ss|
+    ss.source_files = 'Pod/Classes/Core', 'BetterContent/Core/*.{h,m}'
+  end
+
+  s.subspec 'Scanner' do |ss|
+    ss.source_files = 'Pod/Classes/Scanner', 'BetterContent/Scanner/*.{h,m}'
+  end
+
 end
