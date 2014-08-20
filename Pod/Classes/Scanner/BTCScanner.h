@@ -11,4 +11,6 @@
 @interface BTCScanner : NSObject
 
 - (NSArray *)visibleComponents;
+
++ (void)registerComponentCollector:(NSString *) componentCollectorClassName;
 @end

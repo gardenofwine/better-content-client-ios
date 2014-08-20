@@ -8,6 +8,7 @@
 
 #import "BTCContentController.h"
 #import "BTCServerCoordinator.h"
+#import "BTCScanner.h"
 
 @implementation BTCContentController
 
@@ -20,7 +21,13 @@
 
 + (void)startEngine{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidFinishLaunchingNotification object:nil];
+    [self registerComponentScanners];
     [[BTCServerCoordinator sharedInstance] start];
+}
+
++ (void)registerComponentScanners{
+    // TODO should be taken from plist, or another automatic way
+    [BTCScanner registerComponentCollector:@"BTCLabelCollector"];
 }
 
 

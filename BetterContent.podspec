@@ -40,6 +40,11 @@ Pod::Spec.new do |s|
 
   s.subspec 'Scanner' do |ss|
     ss.source_files = 'Pod/Classes/Scanner', 'BetterContent/Scanner/*.{h,m}'
+
+    ss.subspec 'Components' do |sss|
+      sss.source_files = 'Pod/Classes/Scanner/Components', 'BetterContent/Scanner/Components/*.{h,m}'
+    end
+
   end
 
 end
