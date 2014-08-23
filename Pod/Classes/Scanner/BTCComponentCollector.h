@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "BTCComponent.h"
 @protocol BTCComponentCollector
 
 - (BOOL)isViewCollectible:(UIView *)view;
-- (NSDictionary *)componentFromView:(UIView *)view;
+- (BTCComponent *)componentFromView:(UIView *)view;
 @end

@@ -9,9 +9,11 @@
 #import <BlocksKit.h>
 #import "BTCServerCoordinator.h"
 #import "BTCScanner.h"
+#import "BTCComponent.h"
 
 @interface BTCServerCoordinator ()
 @property (nonatomic) BTCScanner *contentScanner;
+@property (nonatomic) NSArray *currentVisibleComponents;
 @end
 
 
@@ -19,12 +21,9 @@
 
 - (void)start{
     self.contentScanner = [BTCScanner new];
+    self.currentVisibleComponents = @[];
     [self startScanTask];
     
-//    self.labelRegistry = [NOCLabelsRegistry new];
-//    self.labelRegistry.delegate = self;
-//    [self initiateLabelScanningTask];
-//    
 //    [self connectWebSocket];
     
 }
@@ -32,15 +31,31 @@
 - (void)startScanTask{
     __weak __typeof(&*self)weakSelf = self;
     [NSTimer bk_scheduledTimerWithTimeInterval:1 block:^(NSTimer *timer) {
-        NSArray *visibleComponents = [weakSelf.contentScanner visibleComponents];
-//        NSArray *nocLabelsArray = [visibleComponents.allKeys bk_map:^id(NSString *key) {
-//            return [[NOCLabel alloc] initWithKey:key label:[visibleLabelsDict valueForKey:key]];
-//        }];
-        
-        // TODO transfer all the labels to be a NSArray of NOCLables
-//        [weakSelf.labelRegistry setCurrentVisibleNOCLabels:nocLabelsArray];
+        NSArray *newVisibleComponents = [weakSelf.contentScanner visibleComponents];
+        if ([self visibleComponentsChanged:newVisibleComponents]){
+            self.currentVisibleComponents = newVisibleComponents;
+            NSLog(@"**== sending changed components to server");
+//            [self sendVisiblecomponentsToServer];
+        }
     } repeats:YES];
+}
+
+#pragma mark - visible components processing
+
+- (BOOL)visibleComponentsChanged:(NSArray *)newVisibleComponents{
+    if (self.currentVisibleComponents.count != newVisibleComponents.count) return YES;
     
+    BOOL changed = [newVisibleComponents bk_any:^BOOL(BTCComponent *component) {
+        if ([self.currentVisibleComponents containsObject:component]){
+            BTCComponent *curentComponent = [self.currentVisibleComponents objectAtIndex:
+                               [self.currentVisibleComponents indexOfObject:component]];
+            return ![curentComponent equalToComponent:component];
+        } else {
+            return YES;
+        }
+    }];
+    
+    return changed;
 }
 
 #pragma mark - singelton

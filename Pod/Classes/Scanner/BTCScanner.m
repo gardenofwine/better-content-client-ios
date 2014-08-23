@@ -12,20 +12,12 @@
 
 @implementation BTCScanner
 
-NSMutableArray *componentScanners;
+NSMutableArray *componentCollectors;
 
 +(void)initialize{
-   componentScanners = [NSMutableArray new];
+   componentCollectors = [NSMutableArray new];
 }
-// Each item is a dictionary with one key and yet another dictionary as a value
-//[
-// {
-//     component_id :{
-//         attributes..
-//     }
-// },
-// 
-//]
+// Each item is a BTCComponent object
 - (NSArray *)visibleComponents{
     UIWindow *topWindow = [[UIApplication sharedApplication] keyWindow];
     NSMutableArray *visibleComponents = [NSMutableArray new];
@@ -36,25 +28,21 @@ NSMutableArray *componentScanners;
 - (void)collectVisibleComponentsFromView:(NSArray *)views inArray:(NSMutableArray *)componentArray{
     __weak typeof(self) weakSelf = self;
     [views bk_each:^(UIView *view) {
-        if ([view isKindOfClass:[UILabel class]]){
-            UILabel *label = (UILabel *)view;
-            // TODO only add labels that are visible on sceen
-            if (label.text && !label.hidden){
-//                [labelDictionary setObject:view forKey:[weakSelf memoryAddress:view]];
-            }
-        }
+        [componentCollectors bk_each:^(id<BTCComponentCollector> componentCollector) {
+            if ([componentCollector isViewCollectible:view])
+                [componentArray addObject:[componentCollector componentFromView:view]];
+        }];
         
         [weakSelf collectVisibleComponentsFromView:[view subviews] inArray:componentArray];
     }];
 }
-
 
 #pragma mark - component regisrty
 + (void)registerComponentCollector:(NSString *) componentCollectorClassName{
     Class klass = NSClassFromString(componentCollectorClassName);
     if ([klass conformsToProtocol:@protocol(BTCComponentCollector)]) {
         id<BTCComponentCollector> instance = [[klass alloc] init];
-        [componentScanners addObject:instance];
+        [componentCollectors addObject:instance];
     } else {
         // TODO error message
     }
