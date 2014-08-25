@@ -10,22 +10,24 @@
 #import "BTCServerCoordinator.h"
 #import "BTCScanner.h"
 #import "BTCComponent.h"
+#import "BTCServerCommunicator.h"
 
-@interface BTCServerCoordinator ()
+@interface BTCServerCoordinator () <BTCServerCommunicatorDelegate>
+@property (nonatomic) BTCServerCommunicator *serverCommunicator;
 @property (nonatomic) BTCScanner *contentScanner;
 @property (nonatomic) NSArray *currentVisibleComponents;
-@end
 
+@end
 
 @implementation BTCServerCoordinator
 
 - (void)start{
+    self.serverCommunicator = [BTCServerCommunicator new];
+    self.serverCommunicator.delegate = self;
     self.contentScanner = [BTCScanner new];
     self.currentVisibleComponents = @[];
-    [self startScanTask];
     
-//    [self connectWebSocket];
-    
+    [self.serverCommunicator connect];
 }
 
 - (void)startScanTask{
@@ -35,10 +37,21 @@
         if ([self visibleComponentsChanged:newVisibleComponents]){
             self.currentVisibleComponents = newVisibleComponents;
             NSLog(@"**== sending changed components to server");
-//            [self sendVisiblecomponentsToServer];
+            [weakSelf.serverCommunicator sendComponents:self.currentVisibleComponents];
         }
     } repeats:YES];
 }
+
+#pragma mark - BTCServerCommunicatorDelegate
+- (void)didConnectToServer{
+    [self startScanTask];
+}
+
+
+- (void)receivedBetterContent:(NSArray *)componentsArray{
+    NSLog(@"**== Did receive components from server");
+}
+
 
 #pragma mark - visible components processing
 
