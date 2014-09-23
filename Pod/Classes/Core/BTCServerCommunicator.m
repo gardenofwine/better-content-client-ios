@@ -12,10 +12,10 @@
 #import "SRWebSocket.h"
 #import "BTCComponent.h"
 
-#define WEBSOCKET_URL @"ws://localhost"
-#define WEBSOCKET_PORT @":5000"
-//#define WEBSOCKET_URL @"http://bettercontent.herokuapp.com/"
-//#define WEBSOCKET_PORT @""
+//#define WEBSOCKET_URL @"ws://localhost"
+//#define WEBSOCKET_PORT @":5000"
+#define WEBSOCKET_URL @"http://bettercontent.herokuapp.com/"
+#define WEBSOCKET_PORT @""
 
 @interface BTCServerCommunicator () <SRWebSocketDelegate>
 
@@ -46,7 +46,7 @@
 - (NSArray *)componentsJSON:(NSArray *)componenetsArray{
     // TODO only send the labels that are not null
     return [componenetsArray bk_map:^id(BTCComponent *component) {
-        return @{@"key": component.key, @"attributes": component.attributes};
+        return @{@"key": component.key, ATTRIBUTES_KEY: component.attributes};
     }];
 }
 
@@ -75,11 +75,12 @@
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
     NSLog(@"** string received %@", message);
     NSData *jsonData = [message dataUsingEncoding:NSUTF8StringEncoding];
-    NSArray *json = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-    
-    [self.delegate receivedBetterContent:json];
-    NSLog(@"** json received %@", json);
+    NSArray *rawComponents = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+    NSArray *components = [rawComponents bk_map:^id(NSDictionary *componentDict) {
+        NSString *key = [componentDict objectForKey:@"key"];
+        return [[BTCComponent alloc] initWithKey:key attributes:[componentDict objectForKey:ATTRIBUTES_KEY] comparator:NULL];
+    }];
+    [self.delegate receivedBetterContent:components];
 }
-
 
 @end

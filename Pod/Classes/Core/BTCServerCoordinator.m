@@ -11,11 +11,13 @@
 #import "BTCScanner.h"
 #import "BTCComponent.h"
 #import "BTCServerCommunicator.h"
+#import "BTCComponentCollector.h"
 
 @interface BTCServerCoordinator () <BTCServerCommunicatorDelegate>
 @property (nonatomic) BTCServerCommunicator *serverCommunicator;
 @property (nonatomic) BTCScanner *contentScanner;
 @property (nonatomic) NSArray *currentVisibleComponents;
+@property (nonatomic) NSTimer *scanTask;
 
 @end
 
@@ -32,7 +34,7 @@
 
 - (void)startScanTask{
     __weak __typeof(&*self)weakSelf = self;
-    [NSTimer bk_scheduledTimerWithTimeInterval:1 block:^(NSTimer *timer) {
+    self.scanTask = [NSTimer bk_scheduledTimerWithTimeInterval:1 block:^(NSTimer *timer) {
         NSArray *newVisibleComponents = [weakSelf.contentScanner visibleComponents];
         if ([self visibleComponentsChanged:newVisibleComponents]){
             self.currentVisibleComponents = newVisibleComponents;
@@ -42,16 +44,24 @@
     } repeats:YES];
 }
 
+- (void)stopScanTask{
+    [self.scanTask invalidate];
+    self.scanTask = nil;
+}
+
 #pragma mark - BTCServerCommunicatorDelegate
 - (void)didConnectToServer{
     [self startScanTask];
 }
 
+- (void)didDisconnectFromServer{
+    [self stopScanTask];
+}
 
 - (void)receivedBetterContent:(NSArray *)componentsArray{
     NSLog(@"**== Did receive components from server");
+    [self updateVisibleComponents:componentsArray];
 }
-
 
 #pragma mark - visible components processing
 
@@ -71,6 +81,22 @@
     return changed;
 }
 
+- (void)updateVisibleComponents:(NSArray *)updatedComponents{
+    [updatedComponents bk_each:^(BTCComponent *newComponent) {
+        if([self.currentVisibleComponents containsObject:newComponent]){
+            BTCComponent *currentComponent = [self.currentVisibleComponents objectAtIndex:[self.currentVisibleComponents indexOfObject:newComponent]];
+            NSLog(@"** updating component %@", currentComponent.attributes);
+            UIView *currentView = currentComponent.view;
+            if (currentView){
+                id<BTCComponentCollector> componentCollector = [BTCScanner componentCollectorForView:currentView];
+                if (componentCollector){
+                    [((NSObject *)componentCollector).class updateCurrentComponent:currentComponent withUpdatedComponent:newComponent];
+                }
+            }
+        }
+    }];
+
+}
 #pragma mark - singelton
 
 + (BTCServerCoordinator *)sharedInstance {

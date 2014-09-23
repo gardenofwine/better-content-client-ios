@@ -12,4 +12,6 @@
 
 - (BOOL)isViewCollectible:(UIView *)view;
 - (BTCComponent *)componentFromView:(UIView *)view;
++ (void)updateCurrentComponent:(BTCComponent *)currentComponent withUpdatedComponent:(BTCComponent *)newComponent;
+
 @end

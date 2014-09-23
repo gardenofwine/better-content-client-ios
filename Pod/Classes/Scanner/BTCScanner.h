@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BTCComponentCollector.h"
 
 @interface BTCScanner : NSObject
 
 - (NSArray *)visibleComponents;
-
 + (void)registerComponentCollector:(NSString *) componentCollectorClassName;
++ (id<BTCComponentCollector>)componentCollectorForView:(UIView *)view;
 @end

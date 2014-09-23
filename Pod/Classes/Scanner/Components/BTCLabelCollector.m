@@ -11,6 +11,8 @@
 #define BTC_LABEL_ATTRIBUTE_TEXT @"text"
 @implementation BTCLabelCollector
 
+#pragma mark - BTCComponentCollector overrides
+
 - (BOOL)isViewCollectible:(UIView *)view{
     if ([view isKindOfClass:[UILabel class]]) {
         UILabel *label = (UILabel *)view;
@@ -33,6 +35,13 @@
                                                attributes:@{BTC_LABEL_ATTRIBUTE_TEXT : label.text}
                                                comparator:comparator];
 }
+
++ (void)updateCurrentComponent:(BTCComponent *)currentComponent withUpdatedComponent:(BTCComponent *)newComponent{
+    UILabel *currentLabel = (UILabel *)currentComponent.view;
+    currentLabel.text = [newComponent.attributes objectForKey:BTC_LABEL_ATTRIBUTE_TEXT];
+}
+
+#pragma mark - private methods
 
 - (NSString *)labelTextFromComponent:(BTCComponent *)component{
     return [component.attributes objectForKey:BTC_LABEL_ATTRIBUTE_TEXT];

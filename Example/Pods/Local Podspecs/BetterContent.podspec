@@ -17,11 +17,11 @@ Pod::Spec.new do |s|
                        * Markdown format.
                        * Don't worry about the indent, we strip it!
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/BetterContent"
+  s.homepage         = "https://github.com/gardenofwine/BetterContent"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "gardenofwine" => "gardenofwine@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/BetterContent.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/gardenofwine/BetterContent.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '6.0'
@@ -32,14 +32,21 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
+  s.dependancy 'EventListener'
   s.dependency 'BlocksKit'
-  
+  s.dependency 'SocketRocket'
+
   s.subspec 'Core' do |ss|
     ss.source_files = 'Pod/Classes/Core', 'BetterContent/Core/*.{h,m}'
   end
 
   s.subspec 'Scanner' do |ss|
     ss.source_files = 'Pod/Classes/Scanner', 'BetterContent/Scanner/*.{h,m}'
+
+    ss.subspec 'Components' do |sss|
+      sss.source_files = 'Pod/Classes/Scanner/Components', 'BetterContent/Scanner/Components/*.{h,m}'
+    end
+
   end
 
 end

@@ -7,12 +7,14 @@
 //
 
 #import "BTCComponent.h"
+#import "MAZeroingWeakRef.h"
 
 @interface BTCComponent ()
+@property (nonatomic) MAZeroingWeakRef *viewWeakReference;
 @end
 
 @implementation BTCComponent
-
+@synthesize view = _view;
 - (instancetype)initWithKey:(NSString *)key attributes:(NSDictionary *)attributes comparator:(ComponentComparator)comparator{
     self = [super init];
     if (self) {
@@ -23,12 +25,18 @@
     return self;
 }
 
-- (instancetype)initWithMemoryAddressKey:(NSObject *)object attributes:(NSDictionary *)attributes comparator:(ComponentComparator)comparator{
+- (instancetype)initWithMemoryAddressKey:(UIView *)object attributes:(NSDictionary *)attributes comparator:(ComponentComparator)comparator{
+    self.viewWeakReference = [MAZeroingWeakRef refWithTarget:object];
     return [self initWithKey:[self.class memoryAddress:object] attributes:attributes comparator:comparator];
 }
 
 - (BOOL)equalToComponent:(BTCComponent *)otherComponent{
     return self.comparator(self, otherComponent);
+}
+
+#pragma mark - get view
+- (UIView *)view{
+    return (UIView *)self.viewWeakReference.target;
 }
 
 #pragma mark - NSObject overrides

@@ -8,7 +8,6 @@
 
 #import "BTCScanner.h"
 #import <BlocksKit.h>
-#import "BTCComponentCollector.h"
 
 @implementation BTCScanner
 
@@ -36,6 +35,17 @@ NSMutableArray *componentCollectors;
         [weakSelf collectVisibleComponentsFromView:[view subviews] inArray:componentArray];
     }];
 }
+
+#pragma mark - component methods
++ (id<BTCComponentCollector>)componentCollectorForView:(UIView *)view{
+    __block id<BTCComponentCollector> viewComponentCollector = nil;
+    [componentCollectors bk_each:^(id<BTCComponentCollector> componentCollector) {
+        if ([componentCollector isViewCollectible:view])
+            viewComponentCollector = componentCollector;
+    }];
+    return viewComponentCollector;
+}
+
 
 #pragma mark - component regisrty
 + (void)registerComponentCollector:(NSString *) componentCollectorClassName{
