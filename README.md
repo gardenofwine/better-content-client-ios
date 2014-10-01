@@ -21,6 +21,7 @@ it, simply add the following line to your Podfile:
 ## TODO
 
  - Read settings (server url) from some plist
+ - Labels - only set labels that haven't changed
 
 
 ## Author
