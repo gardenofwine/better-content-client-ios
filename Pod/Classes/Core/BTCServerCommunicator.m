@@ -20,8 +20,12 @@
 @interface BTCServerCommunicator () <SRWebSocketDelegate>
 
 @property (nonatomic) SRWebSocket *webSocket;
+// For some reason the socket gets killed if no communication is being done every X seconds
+@property (nonatomic) NSTimer *keepAlive;
 
 @end
+
+#define KEEP_ALIVE_INTERVAL 10
 
 @implementation BTCServerCommunicator
 
@@ -50,6 +54,17 @@
     }];
 }
 
+- (void)startKeepAlive{
+    __weak __typeof(self)weakSelf = self;
+    self.keepAlive = [NSTimer bk_scheduledTimerWithTimeInterval:KEEP_ALIVE_INTERVAL block:^(NSTimer *timer) {
+        [weakSelf.webSocket send:[NSJSONSerialization dataWithJSONObject:@{@"type":@"ping"} options:kNilOptions error:nil]];
+    } repeats:YES];
+}
+
+- (void)serverDisconnectedActions{
+    [self.keepAlive invalidate];
+    self.keepAlive = nil;
+}
 
 #pragma mark - RocektSocketDelegate
 - (void)webSocketDidOpen:(SRWebSocket *)newWebSocket {
@@ -57,17 +72,20 @@
     self.webSocket = newWebSocket;
     NSData *handshake = [NSJSONSerialization dataWithJSONObject:@{@"type":@"register", @"data": @"nativeApp"} options:kNilOptions error:nil];
     [self.webSocket send:handshake];
+    [self startKeepAlive];
     [self.delegate didConnectToServer];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error{
     NSLog(@"** webSocket:didFailWithError %@", error);
+    [self serverDisconnectedActions];
    [self performSelector:@selector(connect) withObject:nil afterDelay:5];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code
            reason:(NSString *)reason wasClean:(BOOL)wasClean {
-    NSLog(@"** webSocket:didCloseWithCode");
+    NSLog(@"** webSocket:didCloseWithCode %d. reason: %@. Was clean? %@", code, reason, wasClean ? @"YES" : @"NO");
+    [self serverDisconnectedActions];
     [self.delegate didDisconnectFromServer];
     [self connect];
 }

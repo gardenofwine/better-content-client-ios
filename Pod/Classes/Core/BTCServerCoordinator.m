@@ -33,7 +33,7 @@
 }
 
 - (void)startScanTask{
-    __weak __typeof(&*self)weakSelf = self;
+    __weak __typeof(self)weakSelf = self;
     self.scanTask = [NSTimer bk_scheduledTimerWithTimeInterval:1 block:^(NSTimer *timer) {
         NSArray *newVisibleComponents = [weakSelf.contentScanner visibleComponents];
         if ([self visibleComponentsChanged:newVisibleComponents]){
