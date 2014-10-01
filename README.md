@@ -18,6 +18,11 @@ it, simply add the following line to your Podfile:
 
     pod "BetterContent"
 
+## TODO
+
+ - Read settings (server url) from some plist
+
+
 ## Author
 
 gardenofwine, gardenofwine@gmail.com
@@ -25,4 +30,3 @@ gardenofwine, gardenofwine@gmail.com
 ## License
 
 BetterContent is available under the GPL license. See the LICENSE file for more info.
-
