@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '6.0'
   s.requires_arc = true
 
-  s.source_files = 'Pod/Classes'
+  s.source_files = 'Pod/Classes/**/*.{h,m}'
   s.resources = 'Pod/Assets/*.png'
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
@@ -36,17 +36,5 @@ Pod::Spec.new do |s|
   s.dependency 'BlocksKit'
   s.dependency 'SocketRocket'
 
-  s.subspec 'Core' do |ss|
-    ss.source_files = 'Pod/Classes/Core', 'BetterContent/Core/*.{h,m}'
-  end
-
-  s.subspec 'Scanner' do |ss|
-    ss.source_files = 'Pod/Classes/Scanner', 'BetterContent/Scanner/*.{h,m}'
-
-    ss.subspec 'Components' do |sss|
-      sss.source_files = 'Pod/Classes/Scanner/Components', 'BetterContent/Scanner/Components/*.{h,m}'
-    end
-
-  end
 
 end
