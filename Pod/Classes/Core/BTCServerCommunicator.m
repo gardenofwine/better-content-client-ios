@@ -12,10 +12,7 @@
 #import "SRWebSocket.h"
 #import "BTCComponent.h"
 
-//#define WEBSOCKET_URL @"ws://localhost"
-//#define WEBSOCKET_PORT @":5000"
-#define WEBSOCKET_URL @"http://bettercontent.herokuapp.com/"
-#define WEBSOCKET_PORT @""
+#define DEFAULT_WEBSOCKET_URL @"ws://localhost:5000"
 
 @interface BTCServerCommunicator () <SRWebSocketDelegate>
 
@@ -33,8 +30,10 @@
     self.webSocket.delegate = nil;
     self.webSocket = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", WEBSOCKET_URL, WEBSOCKET_PORT];
-    SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:urlString]];
+    NSString *websocketURL = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"BTCURL"];
+    if (websocketURL == nil) websocketURL = DEFAULT_WEBSOCKET_URL;
+    NSLog(@"**== WebSocket URL: %@", websocketURL);
+    SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:websocketURL]];
     newWebSocket.delegate = self;
     
     [newWebSocket open];

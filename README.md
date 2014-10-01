@@ -18,6 +18,11 @@ it, simply add the following line to your Podfile:
 
     pod "BetterContent"
 
+## Configuration
+
+BetterContent will try to access a websocket server on ws://localhost:5000 by default. In order to customize the url, add a custom key named `BTCURL` (of type `String`) to your \{app\}-info.plist.
+
+![info.plist screenshot](assets/app-info.png "info.plist screenshot")
 ## TODO
 
  - Read settings (server url) from some plist
