@@ -20,14 +20,13 @@ it, simply add the following line to your Podfile:
 
 ## Configuration
 
-BetterContent will try to access a websocket server on ws://localhost:5000 by default. In order to customize the url, add a custom key named `BTCURL` (of type `String`) to your \{app\}-info.plist.
+BetterContent will try to access a websocket server on ws://localhost:5000 by default. In order to customize the url, Edit the `BTCConstants.h` file.
 
-![info.plist screenshot](assets/app-info.png "info.plist screenshot")
+<sub>_(Since Bettercontent is a Development only pod, I did not wish to pollute any common assets such as `app.plist` in order to edit the URL property.)_</sub>
+
 ## TODO
 
- - Read settings (server url) from some plist
  - Labels - only set labels that haven't changed
-
 
 ## Author
 

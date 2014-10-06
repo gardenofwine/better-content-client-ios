@@ -9,10 +9,10 @@
 #import "BTCServerCommunicator.h"
 
 #import <BlocksKit.h>
+#import "BTCConstants.h"
 #import "SRWebSocket.h"
 #import "BTCComponent.h"
 
-#define DEFAULT_WEBSOCKET_URL @"ws://localhost:5000"
 
 @interface BTCServerCommunicator () <SRWebSocketDelegate>
 
@@ -30,10 +30,7 @@
     self.webSocket.delegate = nil;
     self.webSocket = nil;
     
-    NSString *websocketURL = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"BTCURL"];
-    if (websocketURL == nil) websocketURL = DEFAULT_WEBSOCKET_URL;
-    NSLog(@"**== WebSocket URL: %@", websocketURL);
-    SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:websocketURL]];
+    SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:BTC_WEBSOCKET_URL]];
     newWebSocket.delegate = self;
     
     [newWebSocket open];

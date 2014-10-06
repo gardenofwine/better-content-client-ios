@@ -135,6 +135,7 @@
 		AE9ABBBF1614458F8D26E102 /* EXPMatchers+conformTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E87BB00421744DEB6D5B63C /* EXPMatchers+conformTo.m */; };
 		B116B88331594B41B699FB62 /* NSObject+A2BlockDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 73550E68509843CCA3BE9F09 /* NSObject+A2BlockDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1618A93A0784EF49674B4A7 /* XCTestRun+Specta.m in Sources */ = {isa = PBXBuildFile; fileRef = 31D81612F1C14A1093CE0741 /* XCTestRun+Specta.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		B201E5D519E3176200A3F0F8 /* BTCConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = B201E5D419E3176200A3F0F8 /* BTCConstants.h */; };
 		B231C73819ABBC28003A01C8 /* BTCServerCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = B231C73619ABBC1B003A01C8 /* BTCServerCommunicator.m */; };
 		B231C73919ABBC30003A01C8 /* BTCRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A8707919A3EA11003FAE8D /* BTCRegistry.m */; };
 		B231C73A19ABBC39003A01C8 /* BTCComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B2421C8919A944B9003D6F92 /* BTCComponent.m */; };
@@ -387,6 +388,7 @@
 		AE23AD93AED34AC7946C3E33 /* NSArray+BlocksKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+BlocksKit.m"; path = "BlocksKit/Core/NSArray+BlocksKit.m"; sourceTree = "<group>"; };
 		AECEB3CBC7C04A8E835F022F /* EXPMatchers+beInstanceOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beInstanceOf.h"; path = "src/matchers/EXPMatchers+beInstanceOf.h"; sourceTree = "<group>"; };
 		B105322F5A444E5598CF8191 /* NSOrderedSet+BlocksKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSOrderedSet+BlocksKit.m"; path = "BlocksKit/Core/NSOrderedSet+BlocksKit.m"; sourceTree = "<group>"; };
+		B201E5D419E3176200A3F0F8 /* BTCConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BTCConstants.h; path = Pod/Classes/Core/BTCConstants.h; sourceTree = "<group>"; };
 		B231C73519ABBC1B003A01C8 /* BTCServerCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BTCServerCommunicator.h; path = Pod/Classes/Core/BTCServerCommunicator.h; sourceTree = "<group>"; };
 		B231C73619ABBC1B003A01C8 /* BTCServerCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BTCServerCommunicator.m; path = Pod/Classes/Core/BTCServerCommunicator.m; sourceTree = "<group>"; };
 		B2421C8819A944B9003D6F92 /* BTCComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BTCComponent.h; path = Pod/Classes/Scanner/BTCComponent.h; sourceTree = "<group>"; };
@@ -546,6 +548,7 @@
 		1B75A86B7B2C4BAB826C6511 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				B201E5D419E3176200A3F0F8 /* BTCConstants.h */,
 				22B46779420F446E8F24FF7A /* BTCContentController.h */,
 				4FB598BEBD3A491F83018A9C /* BTCContentController.m */,
 				6C54956EB6EC43DCB803DB6C /* BTCServerCoordinator.h */,
@@ -942,6 +945,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B201E5D519E3176200A3F0F8 /* BTCConstants.h in Headers */,
 				B2A8708019A3EEF0003FAE8D /* BTCComponentCollector.h in Headers */,
 				F09A3339487C4EA1B9CC949E /* BTCContentController.h in Headers */,
 				B2CCED8219A4E6C0005ACF20 /* BTCLabelCollector.h in Headers */,
