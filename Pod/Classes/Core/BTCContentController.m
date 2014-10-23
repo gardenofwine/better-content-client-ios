@@ -21,14 +21,14 @@
 
 + (void)startEngine{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidFinishLaunchingNotification object:nil];
-    [self registerComponentScanners];
+//    [self registerComponentScanners];
     [[BTCServerCoordinator sharedInstance] start];
 }
 
-+ (void)registerComponentScanners{
-    // TODO should be taken from plist, or another automatic way
-    [BTCScanner registerComponentCollector:@"BTCLabelCollector"];
-}
+//+ (void)registerComponentScanners{
+//    // TODO should be taken from plist, or another automatic way
+//    [BTCScanner registerComponentCollector:@"BTCLabelCollector"];
+//}
 
 
 

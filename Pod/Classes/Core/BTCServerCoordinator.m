@@ -70,12 +70,15 @@
     
     BOOL changed = [newVisibleComponents bk_any:^BOOL(BTCComponent *component) {
         if ([self.currentVisibleComponents containsObject:component]){
-            BTCComponent *curentComponent = [self.currentVisibleComponents objectAtIndex:
+            BTCComponent *currentComponent = [self.currentVisibleComponents objectAtIndex:
                                [self.currentVisibleComponents indexOfObject:component]];
-            return ![curentComponent equalToComponent:component];
-        } else {
-            return YES;
-        }
+            if (currentComponent.view && component.view) {
+                return ![currentComponent.view isEqual:component.view];
+            }
+//            return ![currentComponent equalToComponent:component];
+        } //else {
+        return YES;
+        //}
     }];
     
     return changed;
@@ -88,10 +91,14 @@
             NSLog(@"** updating component %@", currentComponent.attributes);
             UIView *currentView = currentComponent.view;
             if (currentView){
-                id<BTCComponentCollector> componentCollector = [BTCScanner componentCollectorForView:currentView];
-                if (componentCollector){
-                    [((NSObject *)componentCollector).class updateCurrentComponent:currentComponent withUpdatedComponent:newComponent];
+//                id<BTCComponentCollector> componentCollector = [BTCScanner componentCollectorForView:currentView];
+                if ([currentComponent respondsToSelector:@selector(updateWithUpdatedComponent:)]){
+                    [currentComponent performSelector:@selector(updateWithUpdatedComponent:) withObject:newComponent];
                 }
+//                if (componentCollector){
+//                    [((NSObject *)componentCollector).class updateCurrentComponent:currentComponent withUpdatedComponent:newComponent];
+//                }
+                
             }
         }
     }];

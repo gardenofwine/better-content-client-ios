@@ -92,7 +92,7 @@
     NSArray *rawComponents = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
     NSArray *components = [rawComponents bk_map:^id(NSDictionary *componentDict) {
         NSString *key = [componentDict objectForKey:@"key"];
-        return [[BTCComponent alloc] initWithKey:key attributes:[componentDict objectForKey:ATTRIBUTES_KEY] comparator:NULL];
+        return [[BTCComponent alloc] initWithKey:key attributes:[componentDict objectForKey:ATTRIBUTES_KEY] /*comparator:NULL*/];
     }];
     [self.delegate receivedBetterContent:components];
 }

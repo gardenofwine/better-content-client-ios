@@ -12,6 +12,6 @@
 @interface BTCScanner : NSObject
 
 - (NSArray *)visibleComponents;
-+ (void)registerComponentCollector:(NSString *) componentCollectorClassName;
-+ (id<BTCComponentCollector>)componentCollectorForView:(UIView *)view;
+//+ (void)registerComponentCollector:(NSString *) componentCollectorClassName;
+//+ (id<BTCComponentCollector>)componentCollectorForView:(UIView *)view;
 @end

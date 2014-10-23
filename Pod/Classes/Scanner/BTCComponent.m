@@ -15,24 +15,31 @@
 
 @implementation BTCComponent
 @synthesize view = _view;
-- (instancetype)initWithKey:(NSString *)key attributes:(NSDictionary *)attributes comparator:(ComponentComparator)comparator{
+- (instancetype)initWithKey:(NSString *)key attributes:(NSDictionary *)attributes { // comparator:(ComponentComparator)comparator{
     self = [super init];
     if (self) {
         _key = key;
         _attributes = attributes;
-        _comparator = comparator;
+//        _comparator = comparator;
     }
     return self;
 }
 
-- (instancetype)initWithMemoryAddressKey:(UIView *)object attributes:(NSDictionary *)attributes comparator:(ComponentComparator)comparator{
+- (instancetype)initWithMemoryAddressKey:(UIView *)object attributes:(NSDictionary *)attributes{ // comparator:(ComponentComparator)comparator{
     self.viewWeakReference = [MAZeroingWeakRef refWithTarget:object];
-    return [self initWithKey:[self.class memoryAddress:object] attributes:attributes comparator:comparator];
+    return [self initWithKey:[self.class memoryAddress:object] attributes:attributes];// comparator:comparator];
 }
 
-- (BOOL)equalToComponent:(BTCComponent *)otherComponent{
-    return self.comparator(self, otherComponent);
+//- (BOOL)equalToComponent:(BTCComponent *)otherComponent{
+//    return self.comparator(self, otherComponent);
+//}
+
+- (void)mergeAttributes:(NSDictionary *)attributes{
+    NSMutableDictionary *currentArrtibutes = [_attributes mutableCopy];
+    [currentArrtibutes addEntriesFromDictionary:attributes];
+    self.attributes = currentArrtibutes;
 }
+
 
 #pragma mark - get view
 - (UIView *)view{
