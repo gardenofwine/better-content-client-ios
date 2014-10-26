@@ -15,24 +15,19 @@
 
 @implementation BTCComponent
 @synthesize view = _view;
-- (instancetype)initWithKey:(NSString *)key attributes:(NSDictionary *)attributes { // comparator:(ComponentComparator)comparator{
+- (instancetype)initWithKey:(NSString *)key attributes:(NSDictionary *)attributes {
     self = [super init];
     if (self) {
         _key = key;
         _attributes = attributes;
-//        _comparator = comparator;
     }
     return self;
 }
 
-- (instancetype)initWithMemoryAddressKey:(UIView *)object attributes:(NSDictionary *)attributes{ // comparator:(ComponentComparator)comparator{
+- (instancetype)initWithMemoryAddressKey:(UIView *)object attributes:(NSDictionary *)attributes{
     self.viewWeakReference = [MAZeroingWeakRef refWithTarget:object];
-    return [self initWithKey:[self.class memoryAddress:object] attributes:attributes];// comparator:comparator];
+    return [self initWithKey:[self.class memoryAddress:object] attributes:attributes];
 }
-
-//- (BOOL)equalToComponent:(BTCComponent *)otherComponent{
-//    return self.comparator(self, otherComponent);
-//}
 
 - (void)mergeAttributes:(NSDictionary *)attributes{
     NSMutableDictionary *currentArrtibutes = [_attributes mutableCopy];
@@ -50,7 +45,7 @@
 
 - (BOOL)isEqual:(id)other{
     BTCComponent *otherComponent = (BTCComponent *)other;
-    return [self.key isEqual:otherComponent.key];
+    return [self.key isEqualToString:otherComponent.key];
 }
 
 - (NSUInteger)hash{

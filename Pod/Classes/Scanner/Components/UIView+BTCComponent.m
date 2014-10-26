@@ -12,8 +12,9 @@
 
 - (BTCComponent *)btcSerialize{
     return [[BTCComponent alloc] initWithMemoryAddressKey:self
-                                               attributes:@{@"frame" : [NSValue valueWithCGRect:self.frame_to_dict]}];
+                                               attributes:@{@"frame" :(__bridge NSDictionary*) CGRectCreateDictionaryRepresentation(self.frame)}];
 }
+
 
 
 @end

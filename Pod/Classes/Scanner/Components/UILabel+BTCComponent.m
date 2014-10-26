@@ -8,10 +8,10 @@
 
 #import "UILabel+BTCComponent.h"
 #import "UIView+BTCComponent.h"
-#import "NSObject+ObjectMap.h"
-
 
 @implementation UILabel (BTCLabel)
+
+- (void)btcIsSerializable{}
 
 - (BTCComponent *)btcSerialize{
     BTCComponent *component = [super btcSerialize];
@@ -19,7 +19,7 @@
     return component;
 }
 
-- (void)updateWithUpdatedComponent:(BTCComponent *)newComponent{
+- (void)updateWithComponent:(BTCComponent *)newComponent{
     self.text = [newComponent.attributes objectForKey:@"text"];
 }
 

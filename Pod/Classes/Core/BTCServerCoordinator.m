@@ -11,7 +11,6 @@
 #import "BTCScanner.h"
 #import "BTCComponent.h"
 #import "BTCServerCommunicator.h"
-#import "BTCComponentCollector.h"
 
 @interface BTCServerCoordinator () <BTCServerCommunicatorDelegate>
 @property (nonatomic) BTCServerCommunicator *serverCommunicator;
@@ -75,14 +74,14 @@
             if (currentComponent.view && component.view) {
                 return ![currentComponent.view isEqual:component.view];
             }
-//            return ![currentComponent equalToComponent:component];
-        } //else {
+        }
         return YES;
-        //}
     }];
     
     return changed;
 }
+
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 
 - (void)updateVisibleComponents:(NSArray *)updatedComponents{
     [updatedComponents bk_each:^(BTCComponent *newComponent) {
@@ -91,14 +90,9 @@
             NSLog(@"** updating component %@", currentComponent.attributes);
             UIView *currentView = currentComponent.view;
             if (currentView){
-//                id<BTCComponentCollector> componentCollector = [BTCScanner componentCollectorForView:currentView];
-                if ([currentComponent respondsToSelector:@selector(updateWithUpdatedComponent:)]){
-                    [currentComponent performSelector:@selector(updateWithUpdatedComponent:) withObject:newComponent];
+                if ([currentComponent.view respondsToSelector:@selector(updateWithComponent:)]){
+                    [currentComponent.view performSelector:@selector(updateWithComponent:) withObject:newComponent];
                 }
-//                if (componentCollector){
-//                    [((NSObject *)componentCollector).class updateCurrentComponent:currentComponent withUpdatedComponent:newComponent];
-//                }
-                
             }
         }
     }];
