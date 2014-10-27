@@ -11,8 +11,9 @@
 @implementation UIView (BTCComponent)
 
 - (BTCComponent *)btcSerialize{
+    CGRect globalFrame = [self convertRect:self.bounds toView:nil];
     return [[BTCComponent alloc] initWithMemoryAddressKey:self
-                                               attributes:@{@"frame" :(__bridge NSDictionary*) CGRectCreateDictionaryRepresentation(self.frame)}];
+                                               attributes:@{@"frame" :(__bridge NSDictionary*) CGRectCreateDictionaryRepresentation(globalFrame)}];
 }
 
 
