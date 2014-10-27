@@ -46,6 +46,7 @@
 - (void)stopScanTask{
     [self.scanTask invalidate];
     self.scanTask = nil;
+    self.currentVisibleComponents = nil;
 }
 
 #pragma mark - BTCServerCommunicatorDelegate
@@ -87,7 +88,7 @@
     [updatedComponents bk_each:^(BTCComponent *newComponent) {
         if([self.currentVisibleComponents containsObject:newComponent]){
             BTCComponent *currentComponent = [self.currentVisibleComponents objectAtIndex:[self.currentVisibleComponents indexOfObject:newComponent]];
-            NSLog(@"** updating component %@", currentComponent.attributes);
+            NSLog(@"** updating component %@ with %@", [currentComponent.attributes objectForKey:@"text"], [newComponent.attributes objectForKey:@"text"]);
             UIView *currentView = currentComponent.view;
             if (currentView){
                 if ([currentComponent.view respondsToSelector:@selector(updateWithComponent:)]){

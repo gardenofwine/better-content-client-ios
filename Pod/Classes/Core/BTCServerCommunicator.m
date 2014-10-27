@@ -60,6 +60,7 @@
 - (void)serverDisconnectedActions{
     [self.keepAlive invalidate];
     self.keepAlive = nil;
+    [self.delegate didDisconnectFromServer];
 }
 
 #pragma mark - RocektSocketDelegate
