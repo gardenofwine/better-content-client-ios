@@ -13,10 +13,10 @@
 
 - (void)btcIsSerializable{}
 
-- (BTCComponent *)btcSerialize{
-    BTCComponent *component = [super btcSerialize];
-    [component mergeAttributes:@{@"text": self.text}];
-    return component;
+- (NSDictionary *)btcAttributes{
+    return @{
+             @"text": self.text
+             };
 }
 
 - (void)updateWithComponent:(BTCComponent *)newComponent{

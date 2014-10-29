@@ -29,13 +29,6 @@
     return [self initWithKey:[self.class memoryAddress:object] attributes:attributes];
 }
 
-- (void)mergeAttributes:(NSDictionary *)attributes{
-    NSMutableDictionary *currentArrtibutes = [_attributes mutableCopy];
-    [currentArrtibutes addEntriesFromDictionary:attributes];
-    self.attributes = currentArrtibutes;
-}
-
-
 #pragma mark - get view
 - (UIView *)view{
     return (UIView *)self.viewWeakReference.target;

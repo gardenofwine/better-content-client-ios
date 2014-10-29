@@ -12,5 +12,6 @@
 @interface UIView (BTCComponent)
 
 - (BTCComponent *)btcSerialize;
+- (NSDictionary *)btcAttributes;
 
 @end
