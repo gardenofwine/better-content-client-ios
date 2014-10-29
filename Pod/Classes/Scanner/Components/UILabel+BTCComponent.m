@@ -15,7 +15,10 @@
 
 - (NSDictionary *)btcAttributes{
     return @{
-             @"text": self.text
+             @"text": self.text,
+             @"font" : @{
+                     @"pointSize" : @(self.font.pointSize)
+                     }
              };
 }
 
