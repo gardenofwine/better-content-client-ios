@@ -15,7 +15,7 @@
 
 - (NSDictionary *)btcAttributes{
     return @{
-             @"text": self.text,
+             @"text": self.safeText,
              @"font" : @{
                      @"pointSize" : @(self.font.pointSize)
                      }
@@ -24,6 +24,11 @@
 
 - (void)updateWithComponent:(BTCComponent *)newComponent{
     self.text = [newComponent.attributes objectForKey:@"text"];
+}
+
+- (NSString *)safeText{
+    if (self.text) return self.text;
+    return @"";
 }
 
 @end
