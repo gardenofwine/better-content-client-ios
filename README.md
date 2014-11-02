@@ -1,9 +1,14 @@
 # BetterContent
 
+__Work in progress__
+
 [![CI Status](http://img.shields.io/travis/gardenofwine/BetterContent.svg?style=flat)](https://travis-ci.org/gardenofwine/BetterContent)
 [![Version](https://img.shields.io/cocoapods/v/BetterContent.svg?style=flat)](http://cocoadocs.org/docsets/BetterContent)
 [![License](https://img.shields.io/cocoapods/l/BetterContent.svg?style=flat)](http://cocoadocs.org/docsets/BetterContent)
 [![Platform](https://img.shields.io/cocoapods/p/BetterContent.svg?style=flat)](http://cocoadocs.org/docsets/BetterContent)
+
+## Server counterpart
+https://github.com/gardenofwine/better-content-server
 
 ## Usage
 
