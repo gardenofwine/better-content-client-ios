@@ -7,6 +7,8 @@ __Work in progress__
 [![License](https://img.shields.io/cocoapods/l/BetterContent.svg?style=flat)](http://cocoadocs.org/docsets/BetterContent)
 [![Platform](https://img.shields.io/cocoapods/p/BetterContent.svg?style=flat)](http://cocoadocs.org/docsets/BetterContent)
 
+![](https://github.com/gardenofwine/better-content-server/blob/master/BetterContentDemo.gif)
+
 ## Server counterpart
 https://github.com/gardenofwine/better-content-server
 
