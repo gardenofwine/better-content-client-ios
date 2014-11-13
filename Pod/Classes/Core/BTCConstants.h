@@ -9,7 +9,7 @@
 #ifndef Pods_BTCConstants_h
 #define Pods_BTCConstants_h
 
-#define BTC_WEBSOCKET_URL @"ws://localhost:5000"
+#define BTC_WEBSOCKET_URL @"http://bettercontent.herokuapp.com/"
 
 
 #endif

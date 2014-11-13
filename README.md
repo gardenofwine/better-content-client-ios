@@ -29,6 +29,7 @@ BetterContent will try to access a websocket server on ws://localhost:5000 by de
  - Labels - only set labels that haven't changed
  - reConnect to server in increasing intervals
  - send UIVIew frame in global coordinates
+ - Support iPhone/iPad horizontal in iOS7 (translate coordinates)
 
 ## Author
 
