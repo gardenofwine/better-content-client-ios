@@ -17,7 +17,17 @@
 }
 
 - (NSDictionary *)btcAttributes{
-    return @{};
+    return @{
+             @"image": [self base64Image]
+            };
 }
 
+- (NSString *)base64Image{
+    if (self.image != nil) {
+        NSString *imageString = [UIImagePNGRepresentation(self.image) base64EncodedStringWithOptions:0];
+        if (imageString != nil) return imageString;
+    }
+    return @"";
+    
+}
 @end
