@@ -19,7 +19,7 @@
 - (NSDictionary *)btcAttributes{
     return @{
              @"image": [self base64Image],
-             @"hidden": @(self.hidden)
+             @"hidden": @(self.hidden || self.alpha < 0.01)
             };
 }
 

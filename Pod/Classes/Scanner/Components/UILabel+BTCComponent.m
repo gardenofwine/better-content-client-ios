@@ -19,10 +19,11 @@
 
 - (NSDictionary *)btcAttributes{
     return @{
-             @"text": self.safeText,
+             @"text": self.btcSafeText,
              @"font" : @{
                      @"pointSize" : @(self.font.pointSize)
-                     }
+                     },
+             @"color" : [self btcHexColor]
              };
 }
 
@@ -30,7 +31,20 @@
     self.text = [newComponent.attributes objectForKey:@"text"];
 }
 
-- (NSString *)safeText{
+- (NSString *)btcHexColor{
+    CGFloat rFloat,gFloat,bFloat,aFloat;
+    int r,g,b,a;
+    [self.textColor getRed:&rFloat green:&gFloat blue: &bFloat alpha: &aFloat];
+    
+    r = (int)(255.0 * rFloat);
+    g = (int)(255.0 * gFloat);
+    b = (int)(255.0 * bFloat);
+    a = (int)(255.0 * aFloat);
+    
+    return [NSString stringWithFormat:@"#%02X%02X%02X",r,g,b];
+}
+
+- (NSString *)btcSafeText{
     if (self.text) return self.text;
     return @"";
 }
