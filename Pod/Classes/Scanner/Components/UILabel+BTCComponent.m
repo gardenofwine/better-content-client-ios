@@ -13,6 +13,10 @@
 
 - (void)btcIsSerializable{}
 
+- (NSString *)btcClass{
+    return @"label";
+}
+
 - (NSDictionary *)btcAttributes{
     return @{
              @"text": self.safeText,

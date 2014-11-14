@@ -15,7 +15,7 @@
     NSMutableDictionary *baseAttributes = [NSMutableDictionary new];
     [baseAttributes addEntriesFromDictionary:@{
                                  @"frame" :(__bridge NSDictionary*) CGRectCreateDictionaryRepresentation(globalFrame),
-                                 @"class" : NSStringFromClass([self class])
+                                 @"class" : [self performSelector:@selector(btcClass)]
                                  }];
     [baseAttributes addEntriesFromDictionary:[self btcAttributes]];
     
