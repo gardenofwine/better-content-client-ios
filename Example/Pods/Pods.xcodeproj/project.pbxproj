@@ -140,8 +140,8 @@
 		B231C73A19ABBC39003A01C8 /* BTCComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B2421C8919A944B9003D6F92 /* BTCComponent.m */; };
 		B2DA2A661A1576820052E200 /* UIView+BTCComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DA2A631A1576710052E200 /* UIView+BTCComponent.m */; };
 		B2DA2A671A1576880052E200 /* UILabel+BTCComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DA2A611A1576710052E200 /* UILabel+BTCComponent.m */; };
-		B2DA2A6A1A1576A00052E200 /* UIImage+BTCComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = B2DA2A681A1576A00052E200 /* UIImage+BTCComponent.h */; };
-		B2DA2A6B1A1576A00052E200 /* UIImage+BTCComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DA2A691A1576A00052E200 /* UIImage+BTCComponent.m */; };
+		B2DA2A6E1A157FEE0052E200 /* UIImageView+BTCComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = B2DA2A6C1A157FEE0052E200 /* UIImageView+BTCComponent.h */; };
+		B2DA2A6F1A157FEE0052E200 /* UIImageView+BTCComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DA2A6D1A157FEE0052E200 /* UIImageView+BTCComponent.m */; };
 		B328E819F0274D07AAAF0935 /* BTCServerCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 075BBBDDE7A343F790FF4354 /* BTCServerCoordinator.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B4665EEEB75642059C8B1800 /* SPTSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = 6597FCD59EC54BB384F4BE4B /* SPTSpec.h */; };
 		B724E47F1CE74EE8AC907486 /* NSObject+BKBlockExecution.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E02C27B7034AEF9C80C71C /* NSObject+BKBlockExecution.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -397,8 +397,8 @@
 		B2DA2A611A1576710052E200 /* UILabel+BTCComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+BTCComponent.m"; path = "Pod/Classes/Scanner/Components/UILabel+BTCComponent.m"; sourceTree = "<group>"; };
 		B2DA2A621A1576710052E200 /* UIView+BTCComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+BTCComponent.h"; path = "Pod/Classes/Scanner/Components/UIView+BTCComponent.h"; sourceTree = "<group>"; };
 		B2DA2A631A1576710052E200 /* UIView+BTCComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+BTCComponent.m"; path = "Pod/Classes/Scanner/Components/UIView+BTCComponent.m"; sourceTree = "<group>"; };
-		B2DA2A681A1576A00052E200 /* UIImage+BTCComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+BTCComponent.h"; path = "Pod/Classes/Scanner/Components/UIImage+BTCComponent.h"; sourceTree = "<group>"; };
-		B2DA2A691A1576A00052E200 /* UIImage+BTCComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+BTCComponent.m"; path = "Pod/Classes/Scanner/Components/UIImage+BTCComponent.m"; sourceTree = "<group>"; };
+		B2DA2A6C1A157FEE0052E200 /* UIImageView+BTCComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+BTCComponent.h"; path = "Pod/Classes/Scanner/Components/UIImageView+BTCComponent.h"; sourceTree = "<group>"; };
+		B2DA2A6D1A157FEE0052E200 /* UIImageView+BTCComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+BTCComponent.m"; path = "Pod/Classes/Scanner/Components/UIImageView+BTCComponent.m"; sourceTree = "<group>"; };
 		B546FCD645864F1BA9A49548 /* NSObject+Expecta.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+Expecta.h"; path = "src/NSObject+Expecta.h"; sourceTree = "<group>"; };
 		B6AB3617270546E28FDD0A7C /* MFMessageComposeViewController+BlocksKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "MFMessageComposeViewController+BlocksKit.m"; path = "BlocksKit/MessageUI/MFMessageComposeViewController+BlocksKit.m"; sourceTree = "<group>"; };
 		B707A9CD3ECB403FA63E2385 /* EXPMatcherHelpers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXPMatcherHelpers.h; path = src/matchers/EXPMatcherHelpers.h; sourceTree = "<group>"; };
@@ -759,8 +759,8 @@
 				B2DA2A611A1576710052E200 /* UILabel+BTCComponent.m */,
 				B2DA2A621A1576710052E200 /* UIView+BTCComponent.h */,
 				B2DA2A631A1576710052E200 /* UIView+BTCComponent.m */,
-				B2DA2A681A1576A00052E200 /* UIImage+BTCComponent.h */,
-				B2DA2A691A1576A00052E200 /* UIImage+BTCComponent.m */,
+				B2DA2A6C1A157FEE0052E200 /* UIImageView+BTCComponent.h */,
+				B2DA2A6D1A157FEE0052E200 /* UIImageView+BTCComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -948,9 +948,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B201E5D519E3176200A3F0F8 /* BTCConstants.h in Headers */,
+				B2DA2A6E1A157FEE0052E200 /* UIImageView+BTCComponent.h in Headers */,
 				F09A3339487C4EA1B9CC949E /* BTCContentController.h in Headers */,
 				2DDD6CAB90894604A504E307 /* BTCScanner.h in Headers */,
-				B2DA2A6A1A1576A00052E200 /* UIImage+BTCComponent.h in Headers */,
 				2B10CB953CCF4C2DAF8034FE /* BTCServerCoordinator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1173,7 +1173,7 @@
 				B2DA2A661A1576820052E200 /* UIView+BTCComponent.m in Sources */,
 				B2DA2A671A1576880052E200 /* UILabel+BTCComponent.m in Sources */,
 				0A0EE893D3AF448F8FE723A9 /* BTCContentController.m in Sources */,
-				B2DA2A6B1A1576A00052E200 /* UIImage+BTCComponent.m in Sources */,
+				B2DA2A6F1A157FEE0052E200 /* UIImageView+BTCComponent.m in Sources */,
 				B231C73819ABBC28003A01C8 /* BTCServerCommunicator.m in Sources */,
 				635FCB726A544A578B1511A4 /* BTCScanner.m in Sources */,
 				B231C73A19ABBC39003A01C8 /* BTCComponent.m in Sources */,

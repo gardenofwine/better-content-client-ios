@@ -1,14 +1,14 @@
 //
-//  UIImage+BTCComponent.m
+//  UIImageView+BTCComponent.m
 //  Pods
 //
 //  Created by Benny Weingarten-Gabbay on 11/14/14.
 //
 //
 
-#import "UIImage+BTCComponent.h"
+#import "UIImageView+BTCComponent.h"
 
-@implementation UIImage (BTCComponent)
+@implementation UIImageView (BTCComponent)
 
 - (void)btcIsSerializable{}
 
