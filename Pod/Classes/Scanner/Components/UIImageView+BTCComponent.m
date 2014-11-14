@@ -18,7 +18,8 @@
 
 - (NSDictionary *)btcAttributes{
     return @{
-             @"image": [self base64Image]
+             @"image": [self base64Image],
+             @"hidden": @(self.hidden)
             };
 }
 
