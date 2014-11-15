@@ -138,8 +138,6 @@
 		B201E5D519E3176200A3F0F8 /* BTCConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = B201E5D419E3176200A3F0F8 /* BTCConstants.h */; };
 		B231C73819ABBC28003A01C8 /* BTCServerCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = B231C73619ABBC1B003A01C8 /* BTCServerCommunicator.m */; };
 		B231C73A19ABBC39003A01C8 /* BTCComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B2421C8919A944B9003D6F92 /* BTCComponent.m */; };
-		B2898C5A1A17BC8300BB536F /* UIImage+Resize.h in Headers */ = {isa = PBXBuildFile; fileRef = B2898C581A17BC8300BB536F /* UIImage+Resize.h */; };
-		B2898C5B1A17BC8300BB536F /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = B2898C591A17BC8300BB536F /* UIImage+Resize.m */; };
 		B2DA2A661A1576820052E200 /* UIView+BTCComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DA2A631A1576710052E200 /* UIView+BTCComponent.m */; };
 		B2DA2A671A1576880052E200 /* UILabel+BTCComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DA2A611A1576710052E200 /* UILabel+BTCComponent.m */; };
 		B2DA2A6E1A157FEE0052E200 /* UIImageView+BTCComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = B2DA2A6C1A157FEE0052E200 /* UIImageView+BTCComponent.h */; };
@@ -395,8 +393,6 @@
 		B231C73619ABBC1B003A01C8 /* BTCServerCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BTCServerCommunicator.m; path = Pod/Classes/Core/BTCServerCommunicator.m; sourceTree = "<group>"; };
 		B2421C8819A944B9003D6F92 /* BTCComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BTCComponent.h; path = Pod/Classes/Scanner/BTCComponent.h; sourceTree = "<group>"; };
 		B2421C8919A944B9003D6F92 /* BTCComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BTCComponent.m; path = Pod/Classes/Scanner/BTCComponent.m; sourceTree = "<group>"; };
-		B2898C581A17BC8300BB536F /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Pod/Classes/lib/UIImage+Resize.h"; sourceTree = "<group>"; };
-		B2898C591A17BC8300BB536F /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Pod/Classes/lib/UIImage+Resize.m"; sourceTree = "<group>"; };
 		B2DA2A601A1576710052E200 /* UILabel+BTCComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+BTCComponent.h"; path = "Pod/Classes/Scanner/Components/UILabel+BTCComponent.h"; sourceTree = "<group>"; };
 		B2DA2A611A1576710052E200 /* UILabel+BTCComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+BTCComponent.m"; path = "Pod/Classes/Scanner/Components/UILabel+BTCComponent.m"; sourceTree = "<group>"; };
 		B2DA2A621A1576710052E200 /* UIView+BTCComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+BTCComponent.h"; path = "Pod/Classes/Scanner/Components/UIView+BTCComponent.h"; sourceTree = "<group>"; };
@@ -756,13 +752,6 @@
 			name = "Support Files";
 			sourceTree = SOURCE_ROOT;
 		};
-		B2898C571A17BC7700BB536F /* lib */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = lib;
-			sourceTree = "<group>";
-		};
 		B2A8708219A3EFB9003FAE8D /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -779,9 +768,6 @@
 		B967CAEF04E346149C4B8C6F /* BetterContent */ = {
 			isa = PBXGroup;
 			children = (
-				B2898C571A17BC7700BB536F /* lib */,
-				B2898C581A17BC8300BB536F /* UIImage+Resize.h */,
-				B2898C591A17BC8300BB536F /* UIImage+Resize.m */,
 				1B75A86B7B2C4BAB826C6511 /* Core */,
 				49621BDBFD294422A76A8A58 /* Scanner */,
 				1B3913FA046B4308A3DAA510 /* Support Files */,
@@ -965,7 +951,6 @@
 				B2DA2A6E1A157FEE0052E200 /* UIImageView+BTCComponent.h in Headers */,
 				F09A3339487C4EA1B9CC949E /* BTCContentController.h in Headers */,
 				2DDD6CAB90894604A504E307 /* BTCScanner.h in Headers */,
-				B2898C5A1A17BC8300BB536F /* UIImage+Resize.h in Headers */,
 				2B10CB953CCF4C2DAF8034FE /* BTCServerCoordinator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1194,7 +1179,6 @@
 				B231C73A19ABBC39003A01C8 /* BTCComponent.m in Sources */,
 				B328E819F0274D07AAAF0935 /* BTCServerCoordinator.m in Sources */,
 				53EA668418D3454E82A431CE /* Pods-BetterContent-BetterContent-dummy.m in Sources */,
-				B2898C5B1A17BC8300BB536F /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

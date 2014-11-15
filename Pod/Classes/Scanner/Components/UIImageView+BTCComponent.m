@@ -7,10 +7,10 @@
 //
 
 #import "UIImageView+BTCComponent.h"
-#import "UIImage+Resize.h"
+#import "UIImage+ResizeMagick.h"
 
-#define MAX_IMAGE_SIZE 1000
-#define MAX_IMAGE_SIDE_SIZE 50
+#define MAX_IMAGE_SIZE 1024
+#define MAX_IMAGE_SIDE_SIZE 32
 @implementation UIImageView (BTCComponent)
 
 - (void)btcIsSerializable{}
@@ -30,7 +30,7 @@
     UIImage *theImage = self.image;
     if (self.image != nil) {
         if ([self shouldResize:self.image.size]){
-            theImage = [self.image resizedImage:[self scaledDownImageSize:self.image.size] interpolationQuality:kCGInterpolationLow];
+            theImage = [self.image resizedImageWithMaximumSize:CGSizeMake(MAX_IMAGE_SIDE_SIZE,MAX_IMAGE_SIDE_SIZE)];
         }
         NSString *imageString = [UIImagePNGRepresentation(theImage) base64EncodedStringWithOptions:0];
         if (imageString != nil) return imageString;
@@ -41,13 +41,5 @@
 - (BOOL)shouldResize:(CGSize)imageSize{
     return imageSize.height * imageSize.width >= MAX_IMAGE_SIZE;
 }
-
-- (CGSize)scaledDownImageSize:(CGSize)originalSize{
-    CGFloat maxSide = MAX(originalSize.width, originalSize.height);
-    CGFloat scaleFactor = MAX_IMAGE_SIDE_SIZE / maxSide;
-    
-    return CGSizeMake(originalSize.width * scaleFactor, originalSize.height * scaleFactor);
-}
-                               
              
 @end

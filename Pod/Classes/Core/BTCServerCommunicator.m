@@ -88,7 +88,7 @@
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-    NSLog(@"** string received %@", message);
+//    NSLog(@"** string received %@", message);
     NSData *jsonData = [message dataUsingEncoding:NSUTF8StringEncoding];
     NSArray *rawComponents = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
     NSArray *components = [rawComponents bk_map:^id(NSDictionary *componentDict) {

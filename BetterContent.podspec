@@ -35,6 +35,6 @@ Pod::Spec.new do |s|
   s.dependency 'MAZeroingWeakRef'
   s.dependency 'BlocksKit'
   s.dependency 'SocketRocket'
-
+  s.dependency 'UIImage-ResizeMagick'
 
 end
