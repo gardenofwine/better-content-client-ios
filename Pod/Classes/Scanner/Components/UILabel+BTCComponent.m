@@ -21,9 +21,9 @@
     return @{
              @"text": self.btcSafeText,
              @"font" : @{
-                     @"pointSize" : @(self.font.pointSize)
-                     },
-             @"color" : [self btcHexColor]
+                     @"pointSize" : @(self.font.pointSize),
+                     @"color" : [self btcHexColor]
+                     }
              };
 }
 
