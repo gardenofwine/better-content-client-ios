@@ -32,14 +32,19 @@
 }
 
 - (NSString *)btcHexColor{
-    CGFloat rFloat,gFloat,bFloat,aFloat;
-    int r,g,b,a;
-    [self.textColor getRed:&rFloat green:&gFloat blue: &bFloat alpha: &aFloat];
+    CGFloat rFloat =0 ,gFloat = 0,bFloat = 0,aFloat = 0;
     
-    r = (int)(255.0 * rFloat);
-    g = (int)(255.0 * gFloat);
-    b = (int)(255.0 * bFloat);
+    int r,g,b,a;
+    const CGFloat* components = CGColorGetComponents(self.textColor.CGColor);
+    r = (int)(255.0 * components[0]);
+    g = (int)(255.0 * components[1]);
+    b = (int)(255.0 * components[2]);
     a = (int)(255.0 * aFloat);
+
+    // This is a non-RGB color
+    if(CGColorGetNumberOfComponents(self.textColor.CGColor) == 2) {
+        g = b = r;
+    }
     
     return [NSString stringWithFormat:@"#%02X%02X%02X",r,g,b];
 }
