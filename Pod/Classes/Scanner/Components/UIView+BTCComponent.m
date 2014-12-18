@@ -11,11 +11,17 @@
 @implementation UIView (BTCComponent)
 
 - (BTCComponent *)btcSerialize{
-    CGRect globalFrame = [self convertRect:self.bounds toView:nil];
+    CGRect globalFrame = [self btcGlobalFrame];
+    CGSize size = [self btcCorrectSizeFromFrame:globalFrame];
     NSMutableDictionary *baseAttributes = [NSMutableDictionary new];
     [baseAttributes addEntriesFromDictionary:@{
-                                 @"frame" :(__bridge NSDictionary*) CGRectCreateDictionaryRepresentation(globalFrame),
-                                 @"class" : [self performSelector:@selector(btcClass)]
+                                @"frame" :@{
+                                        @"X": @(globalFrame.origin.x),
+                                        @"Y": @(globalFrame.origin.y),
+                                        @"Width": @(size.width),
+                                        @"Height": @(size.height)
+                                           },
+                                @"class" : [self performSelector:@selector(btcClass)]
                                  }];
     [baseAttributes addEntriesFromDictionary:[self btcAttributes]];
     
@@ -27,5 +33,22 @@
     return @{};
 }
 
+- (CGSize)btcSize{
+    return CGSizeZero;
+}
+
+#pragma mark - helpers
+
+- (CGRect)btcGlobalFrame{
+    return [self convertRect:self.bounds toView:nil];
+}
+
+- (CGSize)btcCorrectSizeFromFrame:(CGRect)frame{
+    CGSize size = [self btcSize];
+    if (size.width == 0 && size.height == 0){
+        size = frame.size;
+    }
+    return size;
+}
 
 @end
