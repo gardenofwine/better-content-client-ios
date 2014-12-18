@@ -29,6 +29,7 @@ NSMutableArray *componentCollectors;
 - (void)collectVisibleComponentsFromView:(NSArray *)views inArray:(NSMutableArray *)componentArray{
     __weak typeof(self) weakSelf = self;
     [views bk_each:^(UIView *view) {
+        if (view.hidden) return;
         if ([view respondsToSelector:@selector(btcIsSerializable)] && [view respondsToSelector:@selector(btcSerialize)]) {
             [componentArray addObject:[view performSelector:@selector(btcSerialize)]];
         }
