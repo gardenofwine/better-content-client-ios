@@ -71,7 +71,6 @@ static char * const SCREENSHOT_KEY = "screenshot";
 
 // This method taken from http://stackoverflow.com/a/7159547/280503
 - (UIImage *)renderedImage{
-    NSLog(@"**== rendering image");
     // Size of the result rendered image
     CGSize targetImageSize = self.frame.size;
     if (targetImageSize.width == 0 || targetImageSize.height == 0)
@@ -79,8 +78,10 @@ static char * const SCREENSHOT_KEY = "screenshot";
     // Check for retina image rendering option
     if (NULL != UIGraphicsBeginImageContextWithOptions) UIGraphicsBeginImageContextWithOptions(targetImageSize, NO, 0);
     else UIGraphicsBeginImageContext(targetImageSize);
-
     CGContextRef context = UIGraphicsGetCurrentContext();
+//    CGContextScaleCTM(context, .5, .5);
+//    CGContextTranslateCTM (context, 100, 100);
+    
     [[self layer] renderInContext:context];
 
     // Get the rendered image
