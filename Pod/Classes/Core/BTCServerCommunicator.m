@@ -39,6 +39,7 @@
 - (void)sendComponents:(NSArray *)componentsArray{
     NSData *componentsJSON = [NSJSONSerialization dataWithJSONObject:@{@"type":@"labelMap", @"data": [self componentsJSON:componentsArray]} options:kNilOptions error:nil];
 
+//    NSLog(@"**== sending %@", [[NSString alloc] initWithData:componentsJSON encoding:NSUTF8StringEncoding]  );
     [self.webSocket send:componentsJSON];
 }
 

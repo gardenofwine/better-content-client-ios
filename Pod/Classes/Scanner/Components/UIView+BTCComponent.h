@@ -14,4 +14,8 @@
 - (BTCComponent *)btcSerialize;
 - (NSDictionary *)btcAttributes;
 - (CGSize)btcSize;
+- (NSString *)btcClass;
+
+- (void)btcSerializeWillStart;
+- (void)btcSerializeDidEnd;
 @end

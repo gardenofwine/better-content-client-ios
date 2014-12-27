@@ -11,6 +11,7 @@
 @implementation UIView (BTCComponent)
 
 - (BTCComponent *)btcSerialize{
+    [self btcSerializeWillStart];
     CGRect globalFrame = [self btcGlobalFrame];
     CGSize size = [self btcCorrectSizeFromFrame:globalFrame];
     NSMutableDictionary *baseAttributes = [NSMutableDictionary new];
@@ -21,21 +22,22 @@
                                         @"Width": @(size.width),
                                         @"Height": @(size.height)
                                            },
-                                @"class" : [self performSelector:@selector(btcClass)]
+                                @"class" : [self btcClass]
                                  }];
     [baseAttributes addEntriesFromDictionary:[self btcAttributes]];
     
+    [self btcSerializeDidEnd];
     return [[BTCComponent alloc] initWithMemoryAddressKey:self
                                                attributes:baseAttributes];
 }
 
-- (NSDictionary *)btcAttributes{
-    return @{};
-}
+#pragma mark - defualt implementations
+- (NSDictionary *)btcAttributes{return @{};}
+- (CGSize)btcSize{return CGSizeZero;}
+- (NSString *)btcClass{return @"";}
+- (void)btcSerializeWillStart{}
+- (void)btcSerializeDidEnd{}
 
-- (CGSize)btcSize{
-    return CGSizeZero;
-}
 
 #pragma mark - helpers
 
