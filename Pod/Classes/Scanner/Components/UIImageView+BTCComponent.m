@@ -12,7 +12,7 @@
 #import "UIImage+ResizeMagick.h"
 #import "UIImageView+Additions.h"
 
-#define MAX_IMAGE_SIDE_SIZE 30
+#define MAX_IMAGE_SIDE_SIZE 35
 #define MAX_IMAGE_SIZE MAX_IMAGE_SIDE_SIZE * MAX_IMAGE_SIDE_SIZE
 
 static char * const SCREENSHOT_KEY = "screenshot";
