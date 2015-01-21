@@ -73,11 +73,13 @@
 - (void)webSocketDidOpen:(SRWebSocket *)newWebSocket {
     NSLog(@"** webSocketDidOpen");
     self.webSocket = newWebSocket;
+    NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+    NSLog(@"**== bundleIdentifier %@", bundleIdentifier);
     NSData *handshake = [NSJSONSerialization dataWithJSONObject:@{
                                                                   @"type":@"register",
                                                                   @"data": @{
                                                                           @"app" : @"nativeApp",
-                                                                          @"appName" : @"temp"
+                                                                          @"appName" : bundleIdentifier
                                                                           }
                                                                   }
                                                         options:kNilOptions error:nil];
