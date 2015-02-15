@@ -22,7 +22,7 @@
                                         @"Width": @(size.width),
                                         @"Height": @(size.height)
                                            },
-                                @"class" : [self btcClass]
+                                @"class" : [self btcClassName]
                                  }];
     [baseAttributes addEntriesFromDictionary:[self btcAttributes]];
     
@@ -33,8 +33,8 @@
 
 #pragma mark - defualt implementations
 - (NSDictionary *)btcAttributes{return @{};}
-- (CGSize)btcSize{return CGSizeZero;}
-- (NSString *)btcClass{return @"";}
+- (CGSize)btcFrameSize{return CGSizeZero;}
+- (NSString *)btcClassName{return @"";}
 - (void)btcSerializeWillStart{}
 - (void)btcSerializeDidEnd{}
 
@@ -46,7 +46,7 @@
 }
 
 - (CGSize)btcCorrectSizeFromFrame:(CGRect)frame{
-    CGSize size = [self btcSize];
+    CGSize size = [self btcFrameSize];
     if (size.width == 0 && size.height == 0){
         size = frame.size;
     }

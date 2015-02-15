@@ -20,7 +20,7 @@ static char * const SCREENSHOT_KEY = "screenshot";
 
 - (void)btcIsSerializable{}
 
-- (NSString *)btcClass{
+- (NSString *)btcClassName{
     return @"image";
 }
 
@@ -31,7 +31,7 @@ static char * const SCREENSHOT_KEY = "screenshot";
             };
 }
 
-- (CGSize)btcSize{
+- (CGSize)btcFrameSize{
     UIImage *image = [self screenshot];
     return image.size;
 }
