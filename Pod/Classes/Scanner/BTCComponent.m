@@ -15,21 +15,38 @@
 
 @implementation BTCComponent
 @synthesize view = _view;
-- (instancetype)initWithKey:(NSString *)key attributes:(NSDictionary *)attributes {
+@synthesize attributes = _attributes;
+
+- (instancetype)initWithView:(UIView *)view {
     self = [super init];
     if (self) {
-        _key = key;
-        _attributes = attributes;
+        self.viewWeakReference = [MAZeroingWeakRef refWithTarget:view];
+        _key = [self.class memoryAddress:view];
     }
     return self;
 }
 
-- (instancetype)initWithMemoryAddressKey:(UIView *)object attributes:(NSDictionary *)attributes{
-    self.viewWeakReference = [MAZeroingWeakRef refWithTarget:object];
-    return [self initWithKey:[self.class memoryAddress:object] attributes:attributes];
+- (instancetype)initFromAttributes:(NSDictionary *)attributes{
+    self = [super init];
+    if (self) {
+        _key = [attributes objectForKey:KEY_KEY];
+        _attributes = [attributes objectForKey:ATTRIBUTES_KEY];
+    }
+    return self;
+    
+}
+
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+- (NSDictionary *)attributes{
+    if (!_attributes) {
+        if ([self.view respondsToSelector:@selector(btcSerialize)])
+         _attributes = @{@"key": self.key, ATTRIBUTES_KEY: [self.view performSelector:@selector(btcSerialize)]};
+    }
+    return _attributes;
 }
 
 #pragma mark - get view
+// Retuns nil if the view has already been deallocated
 - (UIView *)view{
     return (UIView *)self.viewWeakReference.target;
 }

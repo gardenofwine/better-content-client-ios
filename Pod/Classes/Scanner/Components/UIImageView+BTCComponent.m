@@ -18,7 +18,9 @@
 static char * const SCREENSHOT_KEY = "screenshot";
 @implementation UIImageView (BTCComponent)
 
-- (void)btcIsSerializable{}
+- (BOOL)btcIsSerializable{
+    return YES;
+}
 
 - (NSString *)btcClassName{
     return @"image";

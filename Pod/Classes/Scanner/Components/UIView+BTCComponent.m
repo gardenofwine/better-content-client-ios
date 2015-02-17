@@ -10,7 +10,7 @@
 
 @implementation UIView (BTCComponent)
 
-- (BTCComponent *)btcSerialize{
+- (NSDictionary *)btcSerialize{
     [self btcSerializeWillStart];
     CGRect globalFrame = [self btcGlobalFrame];
     CGSize size = [self btcCorrectSizeFromFrame:globalFrame];
@@ -27,8 +27,7 @@
     [baseAttributes addEntriesFromDictionary:[self btcAttributes]];
     
     [self btcSerializeDidEnd];
-    return [[BTCComponent alloc] initWithMemoryAddressKey:self
-                                               attributes:baseAttributes];
+    return baseAttributes;
 }
 
 #pragma mark - defualt implementations

@@ -11,7 +11,9 @@
 
 @implementation UILabel (BTCLabel)
 
-- (void)btcIsSerializable{}
+- (BOOL)btcIsSerializable{
+    return YES;
+}
 
 - (NSString *)btcClassName{
     return @"label";
@@ -32,7 +34,7 @@
 }
 
 - (NSString *)btcHexColor{
-    CGFloat rFloat =0 ,gFloat = 0,bFloat = 0,aFloat = 0;
+    CGFloat aFloat = 0;
     
     int r,g,b,a;
     const CGFloat* components = CGColorGetComponents(self.textColor.CGColor);

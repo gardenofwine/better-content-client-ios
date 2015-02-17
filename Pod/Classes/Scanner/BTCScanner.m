@@ -7,6 +7,7 @@
 //
 
 #import "BTCScanner.h"
+#import "BTCComponent.h"
 #import <BlocksKit.h>
 
 @implementation BTCScanner
@@ -30,8 +31,10 @@ NSMutableArray *componentCollectors;
     __weak typeof(self) weakSelf = self;
     [views bk_each:^(UIView *view) {
         if (view.hidden) return;
-        if ([view respondsToSelector:@selector(btcIsSerializable)] && [view respondsToSelector:@selector(btcSerialize)]) {
-            [componentArray addObject:[view performSelector:@selector(btcSerialize)]];
+        if ([view respondsToSelector:@selector(btcIsSerializable)]) {
+            if ([view performSelector:@selector(btcIsSerializable) withObject:nil]) {
+            [componentArray addObject:[[BTCComponent alloc ] initWithView:view]];
+        }
         }
         [weakSelf collectVisibleComponentsFromView:[view subviews] inArray:componentArray];
     }];

@@ -9,13 +9,15 @@
 #import <Foundation/Foundation.h>
 @class BTCComponent;
 
+
 #define ATTRIBUTES_KEY @"attributes"
+#define KEY_KEY @"key"
 @interface BTCComponent : NSObject
 
-@property (nonatomic, strong) NSString *key;
-@property (nonatomic, strong) NSDictionary *attributes;
+@property (nonatomic, readonly) NSString *key;
+@property (nonatomic, readonly) NSDictionary *attributes;
 @property (nonatomic, readonly) UIView *view;
 
-- (instancetype)initWithKey:(NSString *)key attributes:(NSDictionary *)attributes;
-- (instancetype)initWithMemoryAddressKey:(UIView *)object attributes:(NSDictionary *)attributes;
+- (instancetype)initWithView:(UIView *)view;
+- (instancetype)initFromAttributes:(NSDictionary *)attributes;
 @end

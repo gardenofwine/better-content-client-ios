@@ -37,7 +37,7 @@
         NSArray *newVisibleComponents = [weakSelf.contentScanner visibleComponents];
         if ([self visibleComponentsChanged:newVisibleComponents]){
             self.currentVisibleComponents = newVisibleComponents;
-            [weakSelf.serverCommunicator sendComponents:self.currentVisibleComponents];
+            [weakSelf.serverCommunicator sendViews:[weakSelf serializedViews:newVisibleComponents]];
         }
     } repeats:YES];
 }
@@ -46,6 +46,13 @@
     [self.scanTask invalidate];
     self.scanTask = nil;
     self.currentVisibleComponents = nil;
+}
+
+#pragma mark - helpers
+- (NSArray *)serializedViews:(NSArray *)componenetsArray{
+    return [componenetsArray bk_map:^id(BTCComponent *component) {
+        return component.attributes;
+    }];
 }
 
 #pragma mark - BTCServerCommunicatorDelegate
@@ -58,7 +65,11 @@
 }
 
 - (void)receivedBetterContent:(NSArray *)componentsArray{
-    [self updateVisibleComponents:componentsArray];
+    NSArray *btcComponents = [componentsArray bk_map:^id(NSDictionary *componentDict) {
+        return [[BTCComponent alloc] initFromAttributes:componentDict];
+    }];
+
+    [self updateVisibleComponents:btcComponents];
 }
 
 #pragma mark - visible components processing

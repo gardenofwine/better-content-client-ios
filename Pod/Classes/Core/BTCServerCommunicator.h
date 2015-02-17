@@ -21,6 +21,6 @@
 @property (nonatomic) id<BTCServerCommunicatorDelegate> delegate;
 
 - (void)connect;
-- (void)sendComponents:(NSArray *)componentsArray;
+- (void)sendViews:(NSArray *)serializedViews;
 
 @end

@@ -11,7 +11,6 @@
 #import <BlocksKit.h>
 #import "BTCConstants.h"
 #import "SRWebSocket.h"
-#import "BTCComponent.h"
 
 @interface BTCServerCommunicator () <SRWebSocketDelegate>
 
@@ -41,19 +40,13 @@
     [newWebSocket open];
 }
 
-- (void)sendComponents:(NSArray *)componentsArray{
-    NSData *componentsJSON = [NSJSONSerialization dataWithJSONObject:@{MESSAGE_TYPE_KEY:MESSAGE_TYPE_CONTENT, MESSAGE_DATA_KEY: [self componentsJSON:componentsArray]} options:kNilOptions error:nil];
-
+- (void)sendViews:(NSArray *)serializedViews{
+    NSData *componentsJSON = [NSJSONSerialization dataWithJSONObject:@{MESSAGE_TYPE_KEY:MESSAGE_TYPE_CONTENT, MESSAGE_DATA_KEY: serializedViews} options:kNilOptions error:nil];
+    
     [self.webSocket send:componentsJSON];
 }
 
 #pragma mark - helpers
-- (NSArray *)componentsJSON:(NSArray *)componenetsArray{
-    return [componenetsArray bk_map:^id(BTCComponent *component) {
-        return @{@"key": component.key, ATTRIBUTES_KEY: component.attributes};
-    }];
-}
-
 - (void)startKeepAlive{
     __weak __typeof(self)weakSelf = self;
     self.keepAlive = [NSTimer bk_scheduledTimerWithTimeInterval:KEEP_ALIVE_INTERVAL block:^(NSTimer *timer) {
@@ -99,11 +92,7 @@
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
     NSData *jsonData = [message dataUsingEncoding:NSUTF8StringEncoding];
     NSArray *rawComponents = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-    NSArray *components = [rawComponents bk_map:^id(NSDictionary *componentDict) {
-        NSString *key = [componentDict objectForKey:@"key"];
-        return [[BTCComponent alloc] initWithKey:key attributes:[componentDict objectForKey:ATTRIBUTES_KEY] /*comparator:NULL*/];
-    }];
-    [self.delegate receivedBetterContent:components];
+    [self.delegate receivedBetterContent:rawComponents];
 }
 
 @end
