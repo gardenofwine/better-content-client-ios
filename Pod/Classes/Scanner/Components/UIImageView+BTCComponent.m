@@ -78,11 +78,8 @@ static char * const SCREENSHOT_KEY = "screenshot";
     if (targetImageSize.width == 0 || targetImageSize.height == 0)
         return nil;
     // Check for retina image rendering option
-    if (NULL != UIGraphicsBeginImageContextWithOptions) UIGraphicsBeginImageContextWithOptions(targetImageSize, NO, 0);
-    else UIGraphicsBeginImageContext(targetImageSize);
+    UIGraphicsBeginImageContextWithOptions(targetImageSize, NO, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();
-//    CGContextScaleCTM(context, .5, .5);
-//    CGContextTranslateCTM (context, 100, 100);
     
     [[self layer] renderInContext:context];
 
