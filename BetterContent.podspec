@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "BetterContent"
-  s.version          = "0.1.0"
+  s.version          = "0.0.1"
   s.summary          = "Allows for real time app content modifications"
   s.description      = <<-DESC
                        When developing web apps, one can open FireBug and make changes to texts and images on the spot, immediately seeing the effect. When developing mobile applications, each change requires code modification, recompile and a reinstall. This makes the development cycle of mobile application longer and more tedious. 
@@ -25,8 +25,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*.{h,m}'
-  s.resources = 'Pod/Assets/*.png'
-
+  
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'MAZeroingWeakRef'
