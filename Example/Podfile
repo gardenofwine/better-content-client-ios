@@ -1,8 +1,0 @@
-
-target 'BetterContent', :exclusive => true do
-  pod "BetterContent", :path => "../"
-
-  pod 'Specta', '~> 0.2.1'
-  pod 'Expecta'
-  pod 'BlocksKit'
-end
