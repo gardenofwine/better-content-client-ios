@@ -10,20 +10,17 @@
 Pod::Spec.new do |s|
   s.name             = "BetterContent"
   s.version          = "0.1.0"
-  s.summary          = "A short description of BetterContent."
+  s.summary          = "Allows for real time app content modifications"
   s.description      = <<-DESC
-                       An optional longer description of BetterContent
+                       When developing web apps, one can open FireBug and make changes to texts and images on the spot, immediately seeing the effect. When developing mobile applications, each change requires code modification, recompile and a reinstall. This makes the development cycle of mobile application longer and more tedious. 
 
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                       When installing the BetterContent pod, you can edit your application in runtime via a browser interface. Run your application and open http://bettercontent.herokuapp.com to edit its content.
                        DESC
-  s.homepage         = "https://github.com/gardenofwine/BetterContent"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage         = "http://bettercontent.herokuapp.com"
   s.license          = 'MIT'
   s.author           = { "gardenofwine" => "gardenofwine@gmail.com" }
-  s.source           = { :git => "https://github.com/gardenofwine/BetterContent.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
+  s.source           = { :git => "https://github.com/gardenofwine/better-content-client-ios.git", :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/gardenofwine'
   s.platform     = :ios, '6.0'
   s.requires_arc = true
 
