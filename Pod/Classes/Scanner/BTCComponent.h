@@ -19,5 +19,6 @@
 @property (nonatomic, readonly) UIView *view;
 
 - (instancetype)initWithView:(UIView *)view;
+- (instancetype)initWithView:(UIView *)view zIndex:(int)zIndex;
 - (instancetype)initFromAttributes:(NSDictionary *)attributes;
 @end

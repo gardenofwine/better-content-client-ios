@@ -11,7 +11,7 @@
 
 @interface UIView (BTCComponent)
 
-- (BTCComponent *)btcSerialize;
+- (BTCComponent *)btcSerialize:(NSNumber *)zIndex;
 - (NSDictionary *)btcAttributes;
 - (CGSize)btcFrameSize;
 - (NSString *)btcClassName;

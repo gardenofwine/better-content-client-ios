@@ -7,21 +7,27 @@
 //
 
 #import "UIView+BTCComponent.h"
+#import "UIColor+HexColors.h"
 
 @implementation UIView (BTCComponent)
 
-- (NSDictionary *)btcSerialize{
+- (NSDictionary *)btcSerialize:(NSNumber *)zIndex{
     [self btcSerializeWillStart];
     CGRect globalFrame = [self btcGlobalFrame];
     CGSize size = [self btcCorrectSizeFromFrame:globalFrame];
     NSMutableDictionary *baseAttributes = [NSMutableDictionary new];
+    NSString *hexColor = [UIColor hexValuesFromUIColor:self.backgroundColor];
+    hexColor = hexColor == nil ? @"" : hexColor;
     [baseAttributes addEntriesFromDictionary:@{
+                                               @"backgroundColor": hexColor,
+                                               @"z-index":zIndex,
                                 @"frame" :@{
                                         @"X": @(globalFrame.origin.x),
                                         @"Y": @(globalFrame.origin.y),
                                         @"Width": @(size.width),
                                         @"Height": @(size.height)
                                            },
+                                               @"nativeClass" : [[self class] description],
                                 @"class" : [self btcClassName]
                                  }];
     [baseAttributes addEntriesFromDictionary:[self btcAttributes]];
@@ -31,9 +37,10 @@
 }
 
 #pragma mark - defualt implementations
+- (BOOL)btcIsSerializable{return NO;}
 - (NSDictionary *)btcAttributes{return @{};}
-- (CGSize)btcFrameSize{return CGSizeZero;}
-- (NSString *)btcClassName{return @"";}
+- (CGSize)btcFrameSize{return self.frame.size;}
+- (NSString *)btcClassName{return @"view";}
 - (void)btcSerializeWillStart{}
 - (void)btcSerializeDidEnd{}
 

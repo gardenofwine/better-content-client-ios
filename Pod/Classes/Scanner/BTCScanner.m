@@ -21,22 +21,24 @@ NSMutableArray *componentCollectors;
 - (NSArray *)visibleComponents{
     UIWindow *topWindow = [[UIApplication sharedApplication] keyWindow];
     NSMutableArray *visibleComponents = [NSMutableArray new];
-    [self collectVisibleComponentsFromView:[topWindow subviews] inArray:visibleComponents];
+    [self collectVisibleComponentsFromView:[topWindow subviews] inArray:visibleComponents index:0];
     return visibleComponents;
 }
 
 #pragma clang diagnostic ignored "-Wundeclared-selector"
 
-- (void)collectVisibleComponentsFromView:(NSArray *)views inArray:(NSMutableArray *)componentArray{
+- (void)collectVisibleComponentsFromView:(NSArray *)views inArray:(NSMutableArray *)componentArray index:(int)zIndex{
+    __block int index = zIndex;
     __weak typeof(self) weakSelf = self;
     [views bk_each:^(UIView *view) {
         if (view.hidden) return;
-        if ([view respondsToSelector:@selector(btcIsSerializable)]) {
-            if ([view performSelector:@selector(btcIsSerializable) withObject:nil]) {
-            [componentArray addObject:[[BTCComponent alloc ] initWithView:view]];
+        BOOL collectView = ([view respondsToSelector:@selector(btcIsSerializable)] && [view performSelector:@selector(btcIsSerializable)]);
+        collectView = collectView || [view isMemberOfClass:[UIView class]];
+        if (collectView) {
+            [componentArray addObject:[[BTCComponent alloc ] initWithView:view zIndex:index]];
+            index = index + 1;
         }
-        }
-        [weakSelf collectVisibleComponentsFromView:[view subviews] inArray:componentArray];
+        [weakSelf collectVisibleComponentsFromView:[view subviews] inArray:componentArray index:index];
     }];
 }
 

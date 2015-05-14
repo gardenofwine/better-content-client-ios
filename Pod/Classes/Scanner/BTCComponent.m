@@ -11,6 +11,7 @@
 
 @interface BTCComponent ()
 @property (nonatomic) MAZeroingWeakRef *viewWeakReference;
+@property (nonatomic) int zIndex;
 @end
 
 @implementation BTCComponent
@@ -22,6 +23,16 @@
     if (self) {
         self.viewWeakReference = [MAZeroingWeakRef refWithTarget:view];
         _key = [self.class memoryAddress:view];
+    }
+    return self;
+}
+
+- (instancetype)initWithView:(UIView *)view zIndex:(int)zIndex {
+    self = [super init];
+    if (self) {
+        self.viewWeakReference = [MAZeroingWeakRef refWithTarget:view];
+        _key = [self.class memoryAddress:view];
+        _zIndex = zIndex;
     }
     return self;
 }
@@ -39,8 +50,8 @@
 #pragma clang diagnostic ignored "-Wundeclared-selector"
 - (NSDictionary *)attributes{
     if (!_attributes) {
-        if ([self.view respondsToSelector:@selector(btcSerialize)])
-         _attributes = @{@"key": self.key, ATTRIBUTES_KEY: [self.view performSelector:@selector(btcSerialize)]};
+        if ([self.view respondsToSelector:@selector(btcSerialize:)])
+            _attributes = @{@"key": self.key, ATTRIBUTES_KEY: [self.view performSelector:@selector(btcSerialize:) withObject:[NSNumber numberWithInt:self.zIndex]]};
     }
     return _attributes;
 }
