@@ -7,29 +7,28 @@
 //
 
 #import "UIView+BTCComponent.h"
-#import "UIColor+HexColors.h"
 
 @implementation UIView (BTCComponent)
 
-- (NSDictionary *)btcSerialize:(NSNumber *)zIndex{
+- (NSDictionary *)btcSerialize:(NSNumber *)zIndex {
     [self btcSerializeWillStart];
     CGRect globalFrame = [self btcGlobalFrame];
     CGSize size = [self btcCorrectSizeFromFrame:globalFrame];
     NSMutableDictionary *baseAttributes = [NSMutableDictionary new];
-    NSString *hexColor = [UIColor hexValuesFromUIColor:self.backgroundColor];
-    hexColor = hexColor == nil ? @"" : hexColor;
+    NSDictionary *backgroundColor = [self btcRGBAColorFromUIColor:self.backgroundColor];
     [baseAttributes addEntriesFromDictionary:@{
-                                               @"backgroundColor": hexColor,
+                                               @"backgroundColor": backgroundColor == nil ? @"" : backgroundColor,
                                                @"z-index":zIndex,
-                                @"frame" :@{
-                                        @"X": @(globalFrame.origin.x),
-                                        @"Y": @(globalFrame.origin.y),
-                                        @"Width": @(size.width),
-                                        @"Height": @(size.height)
-                                           },
+                                               @"native-class": NSStringFromClass([self class]),
+                                               @"frame" :@{
+                                                       @"X": @(globalFrame.origin.x),
+                                                       @"Y": @(globalFrame.origin.y),
+                                                       @"Width": @(size.width),
+                                                       @"Height": @(size.height)
+                                                       },
                                                @"nativeClass" : [[self class] description],
-                                @"class" : [self btcClassName]
-                                 }];
+                                               @"class" : [self btcClassName]
+                                               }];
     [baseAttributes addEntriesFromDictionary:[self btcAttributes]];
     
     [self btcSerializeDidEnd];
@@ -37,26 +36,65 @@
 }
 
 #pragma mark - defualt implementations
-- (BOOL)btcIsSerializable{return NO;}
-- (NSDictionary *)btcAttributes{return @{};}
-- (CGSize)btcFrameSize{return self.frame.size;}
-- (NSString *)btcClassName{return @"view";}
-- (void)btcSerializeWillStart{}
-- (void)btcSerializeDidEnd{}
+- (BOOL)btcIsSerializable {
+    return NO;
+}
+- (NSDictionary *)btcAttributes {
+    return @{};
+}
+- (CGSize)btcFrameSize {
+    return self.frame.size;
+}
+- (NSString *)btcClassName {
+    return @"view";
+}
+- (void)btcSerializeWillStart {
+}
+- (void)btcSerializeDidEnd {
+}
 
 
 #pragma mark - helpers
 
-- (CGRect)btcGlobalFrame{
+- (CGRect)btcGlobalFrame {
     return [self convertRect:self.bounds toView:nil];
 }
 
-- (CGSize)btcCorrectSizeFromFrame:(CGRect)frame{
+- (CGSize)btcCorrectSizeFromFrame:(CGRect)frame {
     CGSize size = [self btcFrameSize];
-    if (size.width == 0 && size.height == 0){
+    if (size.width == 0 && size.height == 0) {
         size = frame.size;
     }
     return size;
+}
+
+- (NSDictionary *)btcRGBAColorFromUIColor:(UIColor *) color {
+    if (color == nil) return nil;
+    CGColorSpaceRef colorSpace = CGColorGetColorSpace([color CGColor]);
+    CGColorSpaceModel colorSpaceModel = CGColorSpaceGetModel(colorSpace);
+    if (colorSpaceModel == kCGColorSpaceModelRGB) {
+        CGFloat r, g, b, a;
+        [color getRed: &r green:&g blue:&b alpha:&a];
+        return @{
+                 @"r": [NSNumber numberWithFloat:r * 255],
+                 @"g": [NSNumber numberWithFloat:g * 255],
+                 @"b": [NSNumber numberWithFloat:b * 255],
+                 @"a": [NSNumber numberWithFloat:a]
+                 };
+    } else if (colorSpaceModel == kCGColorSpaceModelMonochrome) {
+        CGFloat w, a;
+        [color getWhite:&w alpha:&a];
+        return @{
+                 @"r": [[NSNumber numberWithFloat:w * 255] stringValue],
+                 @"g": [NSNumber numberWithFloat:w * 255],
+                 @"b": [NSNumber numberWithFloat:w * 255],
+                 @"a": [NSNumber numberWithFloat:a]
+                 };
+        
+    } else {
+        NSLog(@"[BTC]: Can't figure out rgba for color space model '%d'", colorSpaceModel);
+        return nil;
+    }
 }
 
 @end
