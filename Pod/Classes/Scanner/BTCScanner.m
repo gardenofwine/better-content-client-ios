@@ -31,7 +31,7 @@ NSMutableArray *componentCollectors;
     __block int index = zIndex;
     __weak typeof(self) weakSelf = self;
     [views bk_each:^(UIView *view) {
-        if (view.hidden) return;
+        if (view.hidden || view.alpha < 0.01) return;
         BOOL collectView = ([view respondsToSelector:@selector(btcIsSerializable)] && [view performSelector:@selector(btcIsSerializable)]);
         collectView = collectView || [view isMemberOfClass:[UIView class]];
         if (collectView) {
