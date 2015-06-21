@@ -16,6 +16,9 @@
     CGSize size = [self btcCorrectSizeFromFrame:globalFrame];
     NSMutableDictionary *baseAttributes = [NSMutableDictionary new];
     NSDictionary *backgroundColor = [self btcRGBAColorFromUIColor:self.backgroundColor];
+    if ([NSStringFromClass([self class]) isEqualToString:@"_UINavigationBarBackIndicatorView"]){
+        NSLog(@"");
+    }
     [baseAttributes addEntriesFromDictionary:@{
                                                @"backgroundColor": backgroundColor == nil ? @"" : backgroundColor,
                                                @"z-index":zIndex,
@@ -79,7 +82,7 @@
                  @"r": [NSNumber numberWithFloat:r * 255],
                  @"g": [NSNumber numberWithFloat:g * 255],
                  @"b": [NSNumber numberWithFloat:b * 255],
-                 @"a": [NSNumber numberWithFloat:a]
+                 @"a": [NSNumber numberWithFloat:a * self.alpha]
                  };
     } else if (colorSpaceModel == kCGColorSpaceModelMonochrome) {
         CGFloat w, a;
@@ -88,7 +91,7 @@
                  @"r": [[NSNumber numberWithFloat:w * 255] stringValue],
                  @"g": [NSNumber numberWithFloat:w * 255],
                  @"b": [NSNumber numberWithFloat:w * 255],
-                 @"a": [NSNumber numberWithFloat:a]
+                 @"a": [NSNumber numberWithFloat:a * self.alpha]
                  };
         
     } else {
